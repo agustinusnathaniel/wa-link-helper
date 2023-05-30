@@ -84,7 +84,7 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex min-h-[70vh] flex-col items-center justify-center gap-8 text-center">
-      <h1 className="text-2xl md:text-3xl">WhatsApp Link Tools</h1>
+      <h1 className="text-2xl md:text-3xl">WhatsApp Link Helper</h1>
 
       <Form {...form}>
         <form
