@@ -1,21 +1,21 @@
 /** @type {import('next-seo').DefaultSeoProps} */
 const defaultSEOConfig = {
-  title: "nextarter-tailwind",
-  titleTemplate: "%s | nextarter-tailwind",
-  defaultTitle: "nextarter-tailwind",
-  description: "Next.js + TailwindCSS v3 + TypeScript template",
-  canonical: "https://nextarter-tailwind.sznm.dev",
+  title: "WhatsApp Link Helper",
+  titleTemplate: "%s | WhatsApp Link Helper",
+  defaultTitle: "WhatsApp Link Helper",
+  description: "WhatsApp Link Helper / Generator",
+  canonical: "https://wa.sznm.dev",
   openGraph: {
-    url: "https://nextarter-tailwind.sznm.dev",
-    title: "nextarter-tailwind",
-    description: "Next.js + TailwindCSS v3 + TypeScript template",
+    url: "https://wa.sznm.dev",
+    title: "wa-link-helper",
+    description: "WhatsApp Link Helper / Generator",
     images: [
       {
-        url: "https://og-image.sznm.dev/**nextarter-tailwind**.sznm.dev.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Fsznm.dev%2Favataaars.svg&widths=250",
-        alt: "nextarter-tailwind.sznm.dev og-image",
+        url: "https://og.sznm.dev/api/generate?heading=WhatsApp%20Link%20Helper&text=https://wa.sznm.dev",
+        alt: "WhatsApp Link Helper og-image",
       },
     ],
-    site_name: "nextarter-tailwind",
+    site_name: "WhatsApp Link Helper",
   },
   twitter: {
     handle: "@sozonome",

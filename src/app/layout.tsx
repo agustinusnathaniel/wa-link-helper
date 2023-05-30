@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
   themeColor: '#FFFFFF',
   openGraph: {
-    url: 'https://wa-link-helper.sznm.dev',
+    url: 'https://wa.sznm.dev',
     title: APP_NAME,
     description: APP_DESCRIPTION,
     images: {
