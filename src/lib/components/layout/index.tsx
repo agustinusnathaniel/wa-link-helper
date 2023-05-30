@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 import { ThemeProvider } from '@/lib/components/theme-provider';
 
 import Footer from './Footer';
-import Header from './Header';
 
 type LayoutProps = {
   children: ReactNode;
@@ -11,9 +10,8 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" forcedTheme="dark">
       <div className="flex min-h-screen flex-col">
-        <Header />
         <main className="wrapper">{children}</main>
         <Footer />
       </div>

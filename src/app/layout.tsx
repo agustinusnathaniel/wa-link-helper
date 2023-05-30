@@ -1,16 +1,18 @@
 import type { Metadata } from 'next';
 
 import Layout from '@/lib/components/layout';
+import { Toaster } from '@/lib/components/toaster';
 import { fontSans } from '@/lib/styles/fonts';
 import { cn } from '@/lib/utils';
 
 import '@/lib/styles/globals.css';
 
-const APP_NAME = 'nextarter-tailwind';
+const APP_NAME = 'WhatsApp Link Helper';
+const APP_DESCRIPTION = 'WhatsApp Link Helper / Generator';
 
 export const metadata: Metadata = {
   title: APP_NAME,
-  description: 'Next.js + TailwindCSS v3 + TypeScript template',
+  description: APP_DESCRIPTION,
   viewport: {
     width: 'device-width',
     initialScale: 1,
@@ -26,12 +28,12 @@ export const metadata: Metadata = {
   },
   themeColor: '#FFFFFF',
   openGraph: {
-    url: 'https://nextarter-tailwind.sznm.dev',
-    title: 'nextarter-tailwind',
-    description: 'Next.js + TailwindCSS v3 + TypeScript template',
+    url: 'https://wa-link-helper.sznm.dev',
+    title: APP_NAME,
+    description: APP_DESCRIPTION,
     images: {
-      url: 'https://og-image.sznm.dev/**nextarter-tailwind**.sznm.dev.png?theme=dark&md=1&fontSize=125px&images=https%3A%2F%2Fsznm.dev%2Favataaars.svg&widths=250',
-      alt: 'nextarter-tailwind.sznm.dev og-image',
+      url: 'https://og.sznm.dev/api/generate?heading=WhatsApp%20Link%20Helper&text=https://wa.sznm.dev',
+      alt: `${APP_NAME} og-image`,
     },
   },
   twitter: {
@@ -56,6 +58,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
         <Layout>
           <div className="flex-1">{children}</div>
         </Layout>
+        <Toaster />
       </body>
     </html>
   );
