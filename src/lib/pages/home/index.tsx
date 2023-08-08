@@ -31,12 +31,13 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/lib/components/ui/popover';
+import { ScrollArea } from '@/lib/components/ui/scroll-area';
 import { useToast } from '@/lib/components/ui/use-toast';
 import {
   countryCodeOptions,
   getPhoneCountryCode,
 } from '@/lib/pages/home/utils';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/styles/utils';
 
 const formSchema = z.object({
   country_code: z.string().min(1),
@@ -119,30 +120,32 @@ const Home: NextPage = () => {
                     </FormControl>
                   </PopoverTrigger>
 
-                  <PopoverContent className="w-min-[200px] p-0">
+                  <PopoverContent className="p-0">
                     <Command>
                       <CommandInput placeholder="Search country code..." />
                       <CommandEmpty>No Country Found.</CommandEmpty>
                       <CommandGroup>
-                        {countryCodeOptions?.map((option) => (
-                          <CommandItem
-                            value={option.label}
-                            key={option.label}
-                            onSelect={() =>
-                              form.setValue('country_code', option.value)
-                            }
-                          >
-                            <Check
-                              className={cn(
-                                'mr-2 h-4 w-4',
-                                option.value === field.value
-                                  ? 'opacity-100'
-                                  : 'opacity-0'
-                              )}
-                            />
-                            {option.label}
-                          </CommandItem>
-                        ))}
+                        <ScrollArea className="h-[200px]">
+                          {countryCodeOptions?.map((option) => (
+                            <CommandItem
+                              value={option.label}
+                              key={option.label}
+                              onSelect={() =>
+                                form.setValue('country_code', option.value)
+                              }
+                            >
+                              <Check
+                                className={cn(
+                                  'mr-2 h-4 w-4',
+                                  option.value === field.value
+                                    ? 'opacity-100'
+                                    : 'opacity-0'
+                                )}
+                              />
+                              {option.label}
+                            </CommandItem>
+                          ))}
+                        </ScrollArea>
                       </CommandGroup>
                     </Command>
                   </PopoverContent>
