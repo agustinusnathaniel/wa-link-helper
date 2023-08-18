@@ -49,6 +49,8 @@ type FormType = z.infer<typeof formSchema>;
 
 const Home: NextPage = () => {
   const { toast } = useToast();
+  const [isCountryCodePopoverOpen, setIsCountryCodePopoverOpen] =
+    React.useState<boolean>(false);
   const form = useForm<FormType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -99,7 +101,10 @@ const Home: NextPage = () => {
               <FormItem>
                 <FormLabel>Country Code</FormLabel>
 
-                <Popover>
+                <Popover
+                  open={isCountryCodePopoverOpen}
+                  onOpenChange={setIsCountryCodePopoverOpen}
+                >
                   <PopoverTrigger asChild>
                     <FormControl>
                       <Button
@@ -130,9 +135,10 @@ const Home: NextPage = () => {
                             <CommandItem
                               value={option.label}
                               key={option.label}
-                              onSelect={() =>
-                                form.setValue('country_code', option.value)
-                              }
+                              onSelect={() => {
+                                form.setValue('country_code', option.value);
+                                setIsCountryCodePopoverOpen(false);
+                              }}
                             >
                               <Check
                                 className={cn(
