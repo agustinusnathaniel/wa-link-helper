@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 import Layout from '@/lib/components/layout';
-import { Toaster } from '@/lib/components/toaster';
+import { Toaster } from '@/lib/components/ui/toaster';
 import { fontSans } from '@/lib/styles/fonts';
 import { cn } from '@/lib/styles/utils';
 

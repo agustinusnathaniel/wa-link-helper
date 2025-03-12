@@ -1,5 +1,3 @@
-/* eslint-disable react/no-array-index-key */
-
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -32,7 +30,7 @@ import {
   PopoverTrigger,
 } from '@/lib/components/ui/popover';
 import { ScrollArea } from '@/lib/components/ui/scroll-area';
-import { useToast } from '@/lib/components/ui/use-toast';
+import { useToast } from '@/lib/hooks/use-toast';
 import {
   countryCodeOptions,
   getPhoneCountryCode,

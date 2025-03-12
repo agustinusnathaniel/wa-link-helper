@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable default-case */
-/* eslint-disable @typescript-eslint/no-use-before-define */
+'use client';
+
 // Inspired by react-hot-toast library
 import * as React from 'react';
 
@@ -16,7 +15,7 @@ type ToasterToast = ToastProps & {
   action?: ToastActionElement;
 };
 
-const actionTypes = {
+const _actionTypes = {
   ADD_TOAST: 'ADD_TOAST',
   UPDATE_TOAST: 'UPDATE_TOAST',
   DISMISS_TOAST: 'DISMISS_TOAST',
@@ -26,11 +25,11 @@ const actionTypes = {
 let count = 0;
 
 function genId() {
-  count = (count + 1) % Number.MAX_VALUE;
+  count = (count + 1) % Number.MAX_SAFE_INTEGER;
   return count.toString();
 }
 
-type ActionType = typeof actionTypes;
+type ActionType = typeof _actionTypes;
 
 type Action =
   | {
@@ -65,7 +64,7 @@ const addToRemoveQueue = (toastId: string) => {
     toastTimeouts.delete(toastId);
     dispatch({
       type: 'REMOVE_TOAST',
-      toastId,
+      toastId: toastId,
     });
   }, TOAST_REMOVE_DELAY);
 
@@ -124,10 +123,6 @@ export const reducer = (state: State, action: Action): State => {
         ...state,
         toasts: state.toasts.filter((t) => t.id !== action.toastId),
       };
-    default:
-      return {
-        ...state,
-      };
   }
 };
 
@@ -160,14 +155,14 @@ function toast({ ...props }: Toast) {
       ...props,
       id,
       open: true,
-      onOpenChange: (open: unknown) => {
+      onOpenChange: (open) => {
         if (!open) dismiss();
       },
     },
   });
 
   return {
-    id,
+    id: id,
     dismiss,
     update,
   };
