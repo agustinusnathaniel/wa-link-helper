@@ -30,12 +30,11 @@ import {
   PopoverTrigger,
 } from '@/lib/components/ui/popover';
 import { ScrollArea } from '@/lib/components/ui/scroll-area';
-import { useToast } from '@/lib/hooks/use-toast';
-import {
-  countryCodeOptions,
-  getPhoneCountryCode,
-} from '@/lib/pages/home/utils';
+import { countryCodeOptions } from '@/lib/pages/home/utils';
 import { cn } from '@/lib/styles/utils';
+import { Textarea } from '@/lib/components/ui/textarea';
+import { parsePhoneNumber } from 'awesome-phonenumber';
+import { toast } from 'sonner';
 
 const formSchema = z.object({
   country_code: z.string().min(1),
@@ -46,9 +45,9 @@ const formSchema = z.object({
 type FormType = z.infer<typeof formSchema>;
 
 const Home: NextPage = () => {
-  const { toast } = useToast();
   const [isCountryCodePopoverOpen, setIsCountryCodePopoverOpen] =
     React.useState<boolean>(false);
+
   const form = useForm<FormType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -65,20 +64,20 @@ const Home: NextPage = () => {
   ]);
 
   const generatedLink = React.useMemo(() => {
-    const phoneCountryCode = getPhoneCountryCode(countryCode);
-    const number = `${phoneCountryCode}${phoneNumber?.replace(/^0+/, '')}`;
+    const parsedPhoneNumber = parsePhoneNumber(phoneNumber, {
+      regionCode: countryCode,
+    });
     const encodedText = text?.length ? encodeURIComponent(text) : '';
     const message = encodedText ? `?text=${encodedText}` : '';
 
-    return `https://wa.me/${number}${message}`;
+    return `https://wa.me/${encodeURIComponent(parsedPhoneNumber.number?.e164 ?? '')}${message}`;
   }, [countryCode, phoneNumber, text]);
 
   const { isValid } = form.formState;
 
   const handleSubmit = () => {
     navigator.clipboard.writeText(generatedLink);
-    toast({
-      title: 'Copied Link',
+    toast('Copied Link', {
       description: generatedLink,
     });
   };
@@ -90,7 +89,7 @@ const Home: NextPage = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
-          className="grid w-60 gap-6 text-start"
+          className="grid w-[80%] gap-6 text-start"
         >
           <FormField
             control={form.control}
@@ -179,7 +178,7 @@ const Home: NextPage = () => {
               <FormItem>
                 <FormLabel>Text (optional)</FormLabel>
                 <FormControl>
-                  <Input type="text" {...field} />
+                  <Textarea {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -192,7 +191,13 @@ const Home: NextPage = () => {
         </form>
       </Form>
 
-      <Button variant="link" asChild disabled={!isValid} hidden={!isValid}>
+      <Button
+        variant="link"
+        className="w-full text-wrap break-all"
+        asChild
+        disabled={!isValid}
+        hidden={!isValid}
+      >
         <a href={generatedLink} target="_blank" rel="noopener noreferrer">
           {isValid ? generatedLink : null}
         </a>

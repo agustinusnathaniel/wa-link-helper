@@ -97,8 +97,7 @@
   }
 
   .wrapper {
-    @apply mx-auto p-6 sm:p-8;
-    max-width: 48rem;
+    @apply mx-auto p-6 sm:p-8 w-full md:w-[40rem] lg:w-[48rem];
   }
 
   input[type='number']::-webkit-inner-spin-button,
