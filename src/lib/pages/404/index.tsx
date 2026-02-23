@@ -8,13 +8,13 @@ const Page404 = () => {
     <>
       <div className="grid gap-2 p-12 text-center">
         <Image
+          alt="404 Illustration"
+          height={320}
           src="/assets/404 Error-amico.svg"
           width={320}
-          height={320}
-          alt="404 Illustration"
         />
-        <Button variant="link" asChild>
-          <a href="https://storyset.com/web" className="text-xs">
+        <Button asChild variant="link">
+          <a className="text-xs" href="https://storyset.com/web">
             Web illustrations by Storyset
           </a>
         </Button>

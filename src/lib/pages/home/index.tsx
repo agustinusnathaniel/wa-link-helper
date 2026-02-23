@@ -1,13 +1,21 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { parsePhoneNumber } from 'awesome-phonenumber';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import type { NextPage } from 'next';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { Button } from '@/lib/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/lib/components/ui/card';
 import {
   Command,
   CommandEmpty,
@@ -30,17 +38,9 @@ import {
   PopoverTrigger,
 } from '@/lib/components/ui/popover';
 import { ScrollArea } from '@/lib/components/ui/scroll-area';
+import { Textarea } from '@/lib/components/ui/textarea';
 import { countryCodeOptions } from '@/lib/pages/home/utils';
 import { cn } from '@/lib/styles/utils';
-import { Textarea } from '@/lib/components/ui/textarea';
-import { parsePhoneNumber } from 'awesome-phonenumber';
-import { toast } from 'sonner';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/lib/components/ui/card';
 
 const formSchema = z.object({
   country_code: z.string().min(1),
@@ -92,15 +92,15 @@ const Home: NextPage = () => {
     <div className="flex min-h-[70vh] flex-col items-center justify-center gap-8 text-center">
       <Card className="w-full md:w-[80%]">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold md:text-3xl">
+          <CardTitle className="font-bold text-2xl md:text-3xl">
             WhatsApp Link Helper
           </CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
             <form
-              onSubmit={form.handleSubmit(handleSubmit)}
               className="grid gap-6 text-start"
+              onSubmit={form.handleSubmit(handleSubmit)}
             >
               <FormField
                 control={form.control}
@@ -110,18 +110,18 @@ const Home: NextPage = () => {
                     <FormLabel>Country Code</FormLabel>
 
                     <Popover
-                      open={isCountryCodePopoverOpen}
                       onOpenChange={setIsCountryCodePopoverOpen}
+                      open={isCountryCodePopoverOpen}
                     >
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
-                            variant="outline"
-                            role="combobox"
                             className={cn(
                               'w-full justify-between',
                               !field.value && 'text-muted-foreground'
                             )}
+                            role="combobox"
+                            variant="outline"
                           >
                             {field.value
                               ? countryCodeOptions?.find(
@@ -141,12 +141,12 @@ const Home: NextPage = () => {
                             <ScrollArea className="h-[200px]">
                               {countryCodeOptions?.map((option) => (
                                 <CommandItem
-                                  value={option.label}
                                   key={option.label}
                                   onSelect={() => {
                                     form.setValue('country_code', option.value);
                                     setIsCountryCodePopoverOpen(false);
                                   }}
+                                  value={option.label}
                                 >
                                   <Check
                                     className={cn(
@@ -196,20 +196,20 @@ const Home: NextPage = () => {
                 )}
               />
 
-              <Button type="submit" disabled={!isValid}>
+              <Button disabled={!isValid} type="submit">
                 Copy Link
               </Button>
             </form>
           </Form>
 
           <Button
-            variant="link"
-            className="w-full text-wrap break-all"
             asChild
+            className="w-full text-wrap break-all"
             disabled={!isValid}
             hidden={!isValid}
+            variant="link"
           >
-            <a href={generatedLink} target="_blank" rel="noopener noreferrer">
+            <a href={generatedLink} rel="noopener noreferrer" target="_blank">
               {isValid ? generatedLink : null}
             </a>
           </Button>

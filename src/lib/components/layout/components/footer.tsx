@@ -1,4 +1,4 @@
-import { ThemeToggle } from '../theme-toggle';
+import { ThemeToggle } from '@/lib/components/theme-toggle';
 
 const Footer = () => {
   return (
@@ -8,8 +8,8 @@ const Footer = () => {
           {new Date().getFullYear()} -{' '}
           <a
             href="https://agustinusnathaniel.com?ref=wa.sznm.dev"
-            target="_blank"
             rel="noopener noreferrer"
+            target="_blank"
           >
             agustinusnathaniel.com
           </a>

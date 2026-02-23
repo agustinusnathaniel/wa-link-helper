@@ -1,5 +1,8 @@
-export const GET = async () => {
-  return new Response(JSON.stringify({ name: 'John Doe' }), {
-    headers: { 'Content-Type': 'application/json' },
-  });
+export const GET = () => {
+  return Response.json(
+    { name: 'John Doe' },
+    {
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
 };

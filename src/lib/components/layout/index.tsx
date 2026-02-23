@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 import { ThemeProvider } from '@/lib/components/theme-provider';
 
-import Footer from './Footer';
+import Footer from './components/footer';
 
 type LayoutProps = {
   children: ReactNode;

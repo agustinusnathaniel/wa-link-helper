@@ -1,11 +1,11 @@
-import getUnicodeFlagIcon from 'country-flag-icons/unicode';
+import getUnicodeFlagIcon from "country-flag-icons/unicode";
 
-import phoneCountryCodes from '@/lib/constants/phone-country-code.json';
+import phoneCountryCodes from "@/lib/constants/phone-country-code.json";
 
 export const countryCodeOptions = Object.keys(phoneCountryCodes).map(
   (countryCode) => {
     const countryFlag = getUnicodeFlagIcon(countryCode);
-    const regionName = new Intl.DisplayNames(['en'], { type: 'region' }).of(
+    const regionName = new Intl.DisplayNames(["en"], { type: "region" }).of(
       countryCode
     );
     const phoneCountryCode =
